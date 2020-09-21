@@ -1,14 +1,14 @@
-import Queue from '../Queue';
+import IsraeliQueue from '../IsraeliQueue';
 
 describe('Queue', () => {
   it('should create empty queue', () => {
-    const queue = new Queue();
+    const queue = new IsraeliQueue();
     expect(queue).not.toBeNull();
     expect(queue.linkedList).not.toBeNull();
   });
 
   it('should enqueue data to queue', () => {
-    const queue = new Queue();
+    const queue = new IsraeliQueue();
 
     queue.enqueue(1);
     queue.enqueue(2);
@@ -17,23 +17,21 @@ describe('Queue', () => {
   });
 
   it('should be possible to enqueue/dequeue objects', () => {
-    const queue = new Queue();
+    const queue = new IsraeliQueue();
 
     queue.enqueue({ value: 'test1', key: 'key1' });
     queue.enqueue({ value: 'test2', key: 'key2' });
-    console.log(queue.data);
+
     const stringifier = (value) => `${value.key}:${value.value}`;
-    
-    console.log(queue.toString(stringifier));
-    
+
     expect(queue.toString(stringifier)).toBe('key1:test1,key2:test2');
     expect(queue.dequeue().value).toBe('test1');
     expect(queue.dequeue().value).toBe('test2');
   });
 
   it('should peek data from queue', () => {
-    const queue = new Queue();
-    console.log(queue);
+    const queue = new IsraeliQueue();
+
     expect(queue.peek()).toBeNull();
 
     queue.enqueue(1);
@@ -44,7 +42,7 @@ describe('Queue', () => {
   });
 
   it('should check if queue is empty', () => {
-    const queue = new Queue();
+    const queue = new IsraeliQueue();
 
     expect(queue.isEmpty()).toBe(true);
 
@@ -54,7 +52,7 @@ describe('Queue', () => {
   });
 
   it('should dequeue from queue in FIFO order', () => {
-    const queue = new Queue();
+    const queue = new IsraeliQueue();
 
     queue.enqueue(1);
     queue.enqueue(2);
@@ -63,5 +61,16 @@ describe('Queue', () => {
     expect(queue.dequeue()).toBe(2);
     expect(queue.dequeue()).toBeNull();
     expect(queue.isEmpty()).toBe(true);
+  });
+
+  it('should be able to push in line', () => {
+    const iq = new IsraeliQueue();
+    iq.enqueue("a");
+    iq.enqueue("c");
+    iq.enqueue("b", "a");
+    expect(iq.dequeue()).toBe("a");
+    expect(iq.dequeue()).toBe("b");
+    expect(iq.dequeue()).toBe("c");
+    expect(iq.isEmpty()).toBe(true);
   });
 });

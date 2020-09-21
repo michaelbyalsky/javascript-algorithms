@@ -11,9 +11,10 @@ describe('PriorityQueue', () => {
     const priorityQueue = new PriorityQueue();
 
     priorityQueue.add(10, 1);
+    console.log(priorityQueue);
     expect(priorityQueue.peek()).toBe(10);
-
     priorityQueue.add(5, 2);
+    console.log(priorityQueue);
     expect(priorityQueue.peek()).toBe(10);
 
     priorityQueue.add(100, 0);
@@ -63,6 +64,7 @@ describe('PriorityQueue', () => {
 
     priorityQueue.changePriority(100, 10);
     priorityQueue.changePriority(10, 20);
+    console.log(priorityQueue);
 
     expect(priorityQueue.poll()).toBe(200);
     expect(priorityQueue.poll()).toBe(5);
